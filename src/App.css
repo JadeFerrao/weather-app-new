@@ -36,3 +36,43 @@
     transform: rotate(360deg);
   }
 }
+
+.weather-container {
+  background: linear-gradient(to bottom, #EE82EE, #4B0082); /* Gradient background */
+  border-radius: 10px;
+  padding: 20px;
+  max-width: 400px;
+  margin: 20px auto;
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-family: 'Arial', sans-serif;
+}
+
+.country-name {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+
+.city-name {
+  font-size: 2em;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.weather-description {
+  font-size: 1.2em;
+  font-style: italic;
+  margin-bottom: 10px;
+  text-transform: capitalize; /* To make sure the description looks neat */
+}
+
+.temperature {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.visibility {
+  font-size: 1.2em;
+}
