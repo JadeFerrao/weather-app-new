@@ -4,15 +4,33 @@ import withBackgroundColor from "../hoc/withBackground";
 import fetchWeatherData from "../api/weatherApi";
 import "../App.css";
 
-const ColoredWeatherCard = withBackgroundColor(WeatherCard, ""); // HOC
+const ColoredWeatherCard = withBackgroundColor(WeatherCard, "");
+const defaultCities = ["London", "Tokyo", "Paris", "New York"];
 
 const Weather = () => {
   const [city, setCity] = useState("");
   const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState(null);
   const [debouncedCity, setDebouncedCity] = useState(""); 
-//   const defaultCities = ["London", "Tokyo", "Paris", "New York"]
+  const [defaultWeatherData, setDefaultWeatherData] = useState([]); 
 
+// displays the default cities
+  useEffect(() => {
+    const fetchDefaultCitiesWeather = async () => {
+      const weatherPromises = defaultCities.map((city) => fetchWeatherData(city));
+      try {
+        const weatherResults = await Promise.all(weatherPromises);
+        setDefaultWeatherData(weatherResults); 
+      } catch (error) {
+        setError("Cannot Fetch.");
+      }
+    };
+
+    fetchDefaultCitiesWeather(); 
+  }, []); 
+
+
+// debounce function to stop recurrent api calls
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedCity(city); 
@@ -51,8 +69,21 @@ const Weather = () => {
         value={city}
         onChange={(event) => setCity(event.target.value)}
       />
+
+      {defaultWeatherData.length > 0 && city.trim() === "" && (
+        <div>
+          <div className="weather-grid">
+            {defaultWeatherData.map((data, index) => (
+              <ColoredWeatherCard key={index} weatherData={data} />
+            ))}
+          </div>
+        </div>
+      )}
+
       {error && <p style={{ color: "red", fontWeight: "bold" }}>{error}</p>}
-      {weatherData && <ColoredWeatherCard weatherData={weatherData} />}
+      <div className="Display-weather-container">
+        {weatherData && <ColoredWeatherCard weatherData={weatherData} />}
+      </div>
     </div>
   );
 };
