@@ -2,51 +2,23 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 .weather-container {
-  background: linear-gradient(to bottom, #EE82EE, #4B0082); /* Gradient background */
+  background: linear-gradient(to bottom, #8afce7, #7bbee7); 
   border-radius: 10px;
   padding: 20px;
-  max-width: 400px;
-  margin: 20px auto;
   color: #fff;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   font-family: 'Arial', sans-serif;
+}
+
+.weather-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 1200px;
 }
 
 .country-name {
@@ -64,7 +36,7 @@
   font-size: 1.2em;
   font-style: italic;
   margin-bottom: 10px;
-  text-transform: capitalize; /* To make sure the description looks neat */
+  text-transform: capitalize; 
 }
 
 .temperature {

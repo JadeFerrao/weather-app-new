@@ -10,7 +10,7 @@ const WeatherCard = ({ weatherData }) => {
       <h1 className="country-name">{weatherData.sys.country}</h1>
       <h3 className="city-name">{weatherData.name}</h3>
       <p className="weather-description">{weatherData.weather[0].description}</p>
-      <p className="temperature">Temperature: {celsius} C</p>
+      <p className="temperature">Temp: {celsius} C</p>
       <p className="visibility">Wind Speed: {weatherData.wind.speed} m/s</p>
     </div>
   );
