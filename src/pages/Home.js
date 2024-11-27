@@ -11,34 +11,36 @@ const Weather = () => {
   const [city, setCity] = useState("");
   const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState(null);
-  const [debouncedCity, setDebouncedCity] = useState(""); 
-  const [defaultWeatherData, setDefaultWeatherData] = useState([]); 
+  const [debouncedCity, setDebouncedCity] = useState("");
+  const [defaultWeatherData, setDefaultWeatherData] = useState([]);
 
-// displays the default cities
+  // displays the default cities
   useEffect(() => {
     const fetchDefaultCitiesWeather = async () => {
-      const weatherPromises = defaultCities.map((city) => fetchWeatherData(city));
+      const weatherdefault = defaultCities.map((city) =>
+        fetchWeatherData(city)
+      );
       try {
-        const weatherResults = await Promise.all(weatherPromises);
-        setDefaultWeatherData(weatherResults); 
-      } catch (error) {
-        setError("Cannot Fetch.");
+        const weatherResults = await Promise.all(weatherdefault);
+        setDefaultWeatherData(weatherResults);
+      } catch {
+        setError("Cannot Fetch");
       }
     };
 
-    fetchDefaultCitiesWeather(); 
-  }, []); 
+    fetchDefaultCitiesWeather();
+  }, []);
 
-
-// debounce function to stop recurrent api calls
+  // debounce function to stop recurrent api calls
   useEffect(() => {
     const timer = setTimeout(() => {
-      setDebouncedCity(city); 
-    }, 1000); 
+      setDebouncedCity(city);
+    }, 1000);
 
-    return () => clearTimeout(timer); 
+    return () => clearTimeout(timer);
   }, [city]);
 
+  // live search
   useEffect(() => {
     const fetchWeather = async () => {
       if (debouncedCity.trim() === "") {
@@ -59,7 +61,7 @@ const Weather = () => {
 
     fetchWeather();
   }, [debouncedCity]);
-  
+
   return (
     <div>
       <h1>Weather App</h1>
